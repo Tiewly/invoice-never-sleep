@@ -1,42 +1,91 @@
 import React, { Component } from "react";
-import { Button, Table } from "semantic-ui-react";
+import { Tab, Table } from "semantic-ui-react";
 import styled from "styled-components";
+import _ from "lodash";
 
-const home = () => (
-  <div>
-    <Button>Hello world this id Home page.</Button>
-    <Button>click me</Button>
-    <Table singleLine>
-      <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell>Name</Table.HeaderCell>
-          <Table.HeaderCell>Registration Date</Table.HeaderCell>
-          <Table.HeaderCell>E-mail address</Table.HeaderCell>
-          <Table.HeaderCell>Premium Plan</Table.HeaderCell>
-        </Table.Row>
-      </Table.Header>
+const panes = [
+  { menuItem: "Tab 1", render: () => <Tab.Pane>Tab 1 Content</Tab.Pane> },
+  { menuItem: "Tab 2", render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
+  { menuItem: "Tab 3", render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
+];
 
-      <Table.Body>
-        <Table.Row>
-          <Table.Cell>John Lilki</Table.Cell>
-          <Table.Cell>September 14, 2013</Table.Cell>
-          <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
-          <Table.Cell>No</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>Jamie Harington</Table.Cell>
-          <Table.Cell>January 11, 2014</Table.Cell>
-          <Table.Cell>jamieharingonton@yahoo.com</Table.Cell>
-          <Table.Cell>Yes</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>Jill Lewis</Table.Cell>
-          <Table.Cell>May 11, 2014</Table.Cell>
-          <Table.Cell>jilsewris22@yahoo.com</Table.Cell>
-          <Table.Cell>Yes</Table.Cell>
-        </Table.Row>
-      </Table.Body>
-    </Table>
-  </div>
-);
-export default home;
+const TabExampleBasic = () => <Tab panes={panes} />;
+
+const tableData = [
+  { name: "John", age: 15, gender: "Male" },
+  { name: "Amber", age: 40, gender: "Female" },
+  { name: "Leslie", age: 25, gender: "Other" },
+  { name: "Ben", age: 70, gender: "Male" },
+];
+
+function exampleReducer(state, action) {
+  switch (action.type) {
+    case "CHANGE_SORT":
+      if (state.column === action.column) {
+        return {
+          ...state,
+          data: state.data.slice().reverse(),
+          direction:
+            state.direction === "ascending" ? "descending" : "ascending",
+        };
+      }
+
+      return {
+        column: action.column,
+        data: _.sortBy(state.data, [action.column]),
+        direction: "ascending",
+      };
+    default:
+      throw new Error();
+  }
+}
+
+const MyStyle = () => {
+  const [state, dispatch] = React.useReducer(exampleReducer, {
+    column: null,
+    data: tableData,
+    direction: null,
+  });
+  const { column, data, direction } = state;
+  return (
+    <Tab.Pane>
+      <Table sortable celled fixed>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell
+              sorted={column === "name" ? direction : null}
+              onClick={() => dispatch({ type: "CHANGE_SORT", column: "name" })}
+            >
+              Name
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              sorted={column === "age" ? direction : null}
+              onClick={() => dispatch({ type: "CHANGE_SORT", column: "age" })}
+            >
+              Age
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              sorted={column === "gender" ? direction : null}
+              onClick={() =>
+                dispatch({ type: "CHANGE_SORT", column: "gender" })
+              }
+            >
+              Gender
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {data.map(({ age, gender, name }) => (
+            <Table.Row key={name}>
+              <Table.Cell>{name}</Table.Cell>
+              <Table.Cell>{age}</Table.Cell>
+              <Table.Cell>{gender}</Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+    </Tab.Pane>
+  );
+};
+
+export default MyStyle;

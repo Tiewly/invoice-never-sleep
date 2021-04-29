@@ -1,21 +1,58 @@
-import React, { Component } from "react";
-import { Tab, Table } from "semantic-ui-react";
+import React, { Component, useState } from "react";
+import { Button, Card, Table, Input } from "semantic-ui-react";
 import styled from "styled-components";
 import _ from "lodash";
 
-const panes = [
-  { menuItem: "Tab 1", render: () => <Tab.Pane>Tab 1 Content</Tab.Pane> },
-  { menuItem: "Tab 2", render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
-  { menuItem: "Tab 3", render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
-];
-
-const TabExampleBasic = () => <Tab panes={panes} />;
-
 const tableData = [
-  { name: "John", age: 15, gender: "Male" },
-  { name: "Amber", age: 40, gender: "Female" },
-  { name: "Leslie", age: 25, gender: "Other" },
-  { name: "Ben", age: 70, gender: "Male" },
+  // { name: "John", age: 15, gender: "Male" },
+  // { name: "Amber", age: 40, gender: "Female" },
+  // { name: "Leslie", age: 25, gender: "Other" },
+  // { name: "Ben", age: 70, gender: "Male" },
+  {
+    no: 1,
+    code: "A123456789",
+    projectName: "Apple",
+    date: "12/02/2564",
+    customerName: "คุณสมชาย",
+    paymentAmount: 1000000.0,
+    status: "รอชำระเงิน",
+  },
+  {
+    no: 2,
+    code: "B123456789",
+    projectName: "Banana",
+    date: "09/05/2564",
+    customerName: "คุณสมหมาย",
+    paymentAmount: 20000.0,
+    status: "รอตรวจสอบ",
+  },
+  {
+    no: 3,
+    code: "C123456789",
+    projectName: "Cat",
+    date: "07/02/2564",
+    customerName: "คุณมีสุข",
+    paymentAmount: 500000.0,
+    status: "จ่ายแล้ว",
+  },
+  {
+    no: 4,
+    code: "D123456789",
+    projectName: "Doctor",
+    date: "22/08/2564",
+    customerName: "คุณกิต",
+    paymentAmount: 550000.0,
+    status: "ไม่สำเร็จ",
+  },
+  {
+    no: 5,
+    code: "E123456789",
+    projectName: "English",
+    date: "21/06/2564",
+    customerName: "คุณคิดดี",
+    paymentAmount: 2750000.0,
+    status: "ยกเลิก",
+  },
 ];
 
 function exampleReducer(state, action) {
@@ -29,62 +66,226 @@ function exampleReducer(state, action) {
             state.direction === "ascending" ? "descending" : "ascending",
         };
       }
-
       return {
         column: action.column,
         data: _.sortBy(state.data, [action.column]),
         direction: "ascending",
       };
+    case "FILTER_STATUS":
+      if (action.value === "All") {
+        return {
+          ...state,
+          data: action.default,
+          direction: null,
+          column: null,
+        };
+      } else {
+        return {
+          ...state,
+          data: action.default.filter((d) => d.status === action.value),
+          direction: null,
+          column: null,
+        };
+      }
     default:
       throw new Error();
   }
 }
 
+function filter() {}
+
 const MyStyle = () => {
+  const [count, setCounter] = useState(0);
+  //table
   const [state, dispatch] = React.useReducer(exampleReducer, {
     column: null,
     data: tableData,
     direction: null,
   });
   const { column, data, direction } = state;
+  //total paymentAmount
+  const Total = data.reduce(
+    (totalPayment, data) => totalPayment + data.paymentAmount,
+    0
+  );
   return (
-    <Tab.Pane>
+    <div>
+      <Input icon="search" iconPosition="left" placeholder="search" />
+      {/* {JSON.stringify(state)} */}
+      <h2>Invoice (ใบแจ้งหนี้)</h2>
+      <Button
+        basic
+        color="blue"
+        onClick={() =>
+          dispatch({ type: "FILTER_STATUS", value: "All", default: tableData })
+        }
+      >
+        ทั้งหมด
+      </Button>
+      <Button
+        basic
+        color="grey"
+        onClick={() =>
+          dispatch({
+            type: "FILTER_STATUS",
+            value: "รอชำระเงิน",
+            default: tableData,
+          })
+        }
+      >
+        รอชำระเงิน
+      </Button>
+      <Button
+        basic
+        color="grey"
+        onClick={() =>
+          dispatch({
+            type: "FILTER_STATUS",
+            value: "รอตรวจสอบ",
+            default: tableData,
+          })
+        }
+      >
+        รอตรวจสอบ
+      </Button>
+      <Button
+        basic
+        color="grey"
+        onClick={() =>
+          dispatch({
+            type: "FILTER_STATUS",
+            value: "จ่ายแล้ว",
+            default: tableData,
+          })
+        }
+      >
+        จ่ายแล้ว
+      </Button>
+      <Button
+        basic
+        color="grey"
+        onClick={() =>
+          dispatch({
+            type: "FILTER_STATUS",
+            value: "ไม่สำเร็จ",
+            default: tableData,
+          })
+        }
+      >
+        ไม่สำเร็จ
+      </Button>
+      <Button
+        basic
+        color="grey"
+        onClick={() =>
+          dispatch({
+            type: "FILTER_STATUS",
+            value: "ยกเลิก",
+            default: tableData,
+          })
+        }
+      >
+        ยกเลิก
+      </Button>
+      <br></br>
+      <Card color="red">ยอดชำระทั้งหมด {Total} บาท</Card>
       <Table sortable celled fixed>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell
-              sorted={column === "name" ? direction : null}
-              onClick={() => dispatch({ type: "CHANGE_SORT", column: "name" })}
+              sorted={column === "no" ? direction : null}
+              onClick={() => dispatch({ type: "CHANGE_SORT", column: "no" })}
             >
-              Name
+              No.
+              <br />
+              ลำดับที่
             </Table.HeaderCell>
             <Table.HeaderCell
-              sorted={column === "age" ? direction : null}
-              onClick={() => dispatch({ type: "CHANGE_SORT", column: "age" })}
+              sorted={column === "code" ? direction : null}
+              onClick={() => dispatch({ type: "CHANGE_SORT", column: "code" })}
             >
-              Age
+              Code <br />
+              เลขที่บิล
             </Table.HeaderCell>
             <Table.HeaderCell
-              sorted={column === "gender" ? direction : null}
+              sorted={column === "projectName" ? direction : null}
               onClick={() =>
-                dispatch({ type: "CHANGE_SORT", column: "gender" })
+                dispatch({ type: "CHANGE_SORT", column: "projectName" })
               }
             >
-              Gender
+              Project Name <br />
+              ชื่อโปรเจค
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              sorted={column === "date" ? direction : null}
+              onClick={() => dispatch({ type: "CHANGE_SORT", column: "date" })}
+            >
+              Date <br />
+              วันที่ออกบิล
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              sorted={column === "customerName" ? direction : null}
+              onClick={() =>
+                dispatch({ type: "CHANGE_SORT", column: "customerName" })
+              }
+            >
+              Customer Name <br />
+              ชื่อลูกค้า
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              sorted={column === "paymentAmount" ? direction : null}
+              onClick={() =>
+                dispatch({ type: "CHANGE_SORT", column: "paymentAmount" })
+              }
+            >
+              Payment Amount <br />
+              ยอดชำระ
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              sorted={column === "slip" ? direction : null}
+              onClick={() => dispatch({ type: "CHANGE_SORT", column: "slip" })}
+            >
+              Slip <br />
+              หลักฐานการโอน
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              sorted={column === "status" ? direction : null}
+              onClick={() =>
+                dispatch({ type: "CHANGE_SORT", column: "status" })
+              }
+            >
+              Status <br />
+              สถานะ
             </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {data.map(({ age, gender, name }) => (
-            <Table.Row key={name}>
-              <Table.Cell>{name}</Table.Cell>
-              <Table.Cell>{age}</Table.Cell>
-              <Table.Cell>{gender}</Table.Cell>
-            </Table.Row>
-          ))}
+          {data.map(
+            ({
+              no,
+              code,
+              projectName,
+              date,
+              customerName,
+              paymentAmount,
+              slip,
+              status,
+            }) => (
+              <Table.Row key={code}>
+                <Table.Cell>{no}</Table.Cell>
+                <Table.Cell>{code}</Table.Cell>
+                <Table.Cell>{projectName}</Table.Cell>
+                <Table.Cell>{date}</Table.Cell>
+                <Table.Cell>{customerName}</Table.Cell>
+                <Table.Cell>{paymentAmount}</Table.Cell>
+                <Table.Cell>{slip}</Table.Cell>
+                <Table.Cell>{status}</Table.Cell>
+              </Table.Row>
+            )
+          )}
         </Table.Body>
       </Table>
-    </Tab.Pane>
+    </div>
   );
 };
 

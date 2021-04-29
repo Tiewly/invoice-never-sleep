@@ -1,13 +1,9 @@
 import React, { Component, useState } from "react";
-import { Button, Card, Table, Input } from "semantic-ui-react";
+import { Button, Card, Table, Input, Label } from "semantic-ui-react";
 import styled from "styled-components";
 import _ from "lodash";
 
 const tableData = [
-  // { name: "John", age: 15, gender: "Male" },
-  // { name: "Amber", age: 40, gender: "Female" },
-  // { name: "Leslie", age: 25, gender: "Other" },
-  // { name: "Ben", age: 70, gender: "Male" },
   {
     no: 1,
     code: "A123456789",
@@ -51,6 +47,51 @@ const tableData = [
     date: "21/06/2564",
     customerName: "คุณคิดดี",
     paymentAmount: 2750000.0,
+    status: "ยกเลิก",
+  },
+  {
+    no: 6,
+    code: "A223456789",
+    projectName: "Pineapple",
+    date: "12/02/2564",
+    customerName: "คุณอาทิตย์",
+    paymentAmount: 10510000.0,
+    status: "รอชำระเงิน",
+  },
+  {
+    no: 7,
+    code: "B223456789",
+    projectName: "Bank",
+    date: "09/05/2564",
+    customerName: "คุณมั่งมี",
+    paymentAmount: 200500.0,
+    status: "รอตรวจสอบ",
+  },
+  {
+    no: 8,
+    code: "C223456789",
+    projectName: "The Richest",
+    date: "07/02/2564",
+    customerName: "คุณเฮงเฮง",
+    paymentAmount: 370000.0,
+    status: "จ่ายแล้ว",
+  },
+  {
+    no: 9,
+    code: "D223456789",
+    projectName: "Heart",
+    date: "22/08/2564",
+    customerName: "คุณใจเดียว",
+    paymentAmount: 150100.0,
+    status: "ไม่สำเร็จ",
+  },
+  {
+    no: 10,
+    code: "E223456789",
+    projectName: "Lovely",
+    date: "21/06/2564",
+    customerName: "คุณข้างกาย",
+    paymentAmount: 270090.0,
     status: "ยกเลิก",
   },
 ];
@@ -104,10 +145,10 @@ const MyStyle = () => {
   });
   const { column, data, direction } = state;
   //total paymentAmount
-  const Total = data.reduce(
-    (totalPayment, data) => totalPayment + data.paymentAmount,
-    0
-  );
+  const Total = data
+    .reduce((totalPayment, data) => totalPayment + data.paymentAmount, 0)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return (
     <div>
       <Input icon="search" iconPosition="left" placeholder="search" />
@@ -273,11 +314,15 @@ const MyStyle = () => {
             }) => (
               <Table.Row key={code}>
                 <Table.Cell>{no}</Table.Cell>
-                <Table.Cell>{code}</Table.Cell>
-                <Table.Cell>{projectName}</Table.Cell>
+                <Table.Cell style={{ color: "blue" }}>{code}</Table.Cell>
+                <Table.Cell style={{ color: "blue" }}>{projectName}</Table.Cell>
                 <Table.Cell>{date}</Table.Cell>
                 <Table.Cell>{customerName}</Table.Cell>
-                <Table.Cell>{paymentAmount}</Table.Cell>
+                <Table.Cell style={{ color: "red" }}>
+                  {paymentAmount
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                </Table.Cell>
                 <Table.Cell>{slip}</Table.Cell>
                 <Table.Cell>{status}</Table.Cell>
               </Table.Row>

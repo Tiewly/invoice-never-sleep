@@ -1,3 +1,29 @@
 .sidebar {
   min-width: 20rem !important;
+  min-height: 52.2rem !important;
+  background: linear-gradient(rgb(15, 92, 183), rgb(171, 203, 231));
+}
+
+h2 {
+  color: white;
+  margin: 5rem 2rem 5rem 2rem !important;
+  text-align: center;
+}
+
+.menu-item {
+  color: white;
+  width: 100%;
+  padding: 1rem 6rem;
+  box-sizing: border-box;
+}
+
+p {
+  display: inline;
+  padding-left: 1rem !important;
+  font-weight: bold;
+}
+
+.menu-item:hover {
+  background: rgb(74, 78, 131);
+  cursor: pointer;
 }

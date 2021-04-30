@@ -1,18 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import { Menu, Table, Input, Segment, Image, Icon } from "semantic-ui-react";
-import styled from "styled-components";
 import _ from "lodash";
-import {
-  AxiosProvider,
-  Request,
-  Get,
-  Delete,
-  Head,
-  Post,
-  Put,
-  Patch,
-  withAxios,
-} from "react-axios";
+import { Get } from "react-axios";
 
 var tableData = [];
 
@@ -64,7 +53,6 @@ function exampleReducer(state, action) {
 }
 
 var focusOn = "";
-
 const MyStyle = () => {
   //table
   const [state, dispatch] = React.useReducer(exampleReducer, {
@@ -79,11 +67,13 @@ const MyStyle = () => {
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   useEffect(() => {
-    dispatch({
-      type: "SET_DATA",
-      data: tableData,
-    });
-  }, []);
+    if (data.length === 0) {
+      dispatch({
+        type: "SET_DATA",
+        data: tableData,
+      });
+    }
+  });
   return (
     <div>
       <Get url="http://my-json-server.typicode.com/Tiewly/data-final/tableData">
@@ -106,6 +96,7 @@ const MyStyle = () => {
             const x = (
               <div className="page">
                 <Input icon="search" iconPosition="left" placeholder="search" />
+
                 <div className="card-account">
                   <Image
                     floated="left"
@@ -114,10 +105,18 @@ const MyStyle = () => {
                     src="https://react.semantic-ui.com/images/avatar/large/jenny.jpg"
                     style={{ marginBottom: "0" }}
                   />
-                  Accounting Manager<br></br>
+                  <i>Accounting Manager</i>
+                  <br></br>
                   <p>Gong Yoo</p>
                 </div>
-                <h3>Invoice (ใบแจ้งหนี้)</h3>
+                <br></br>
+                <br></br>
+                <a>Project management > Invoice</a>
+                <br></br>
+                <div className="header-name">
+                  <p>Invoice </p>
+                  <a>(ใบแจ้งหนี้)</a>
+                </div>
                 <Segment>
                   <div
                     className={`button button1 ${
@@ -131,7 +130,7 @@ const MyStyle = () => {
                       })
                     }
                   >
-                    ทั้งหมด{tableData.length}
+                    ทั้งหมด ({tableData.length})
                   </div>
                   <div
                     className={`button button2 ${
@@ -145,8 +144,8 @@ const MyStyle = () => {
                       })
                     }
                   >
-                    รอชำระเงิน
-                    {tableData.filter((i) => i.status === "รอชำระเงิน").length}
+                    รอชำระเงิน (
+                    {tableData.filter((i) => i.status === "รอชำระเงิน").length})
                   </div>
                   <div
                     className={`button button3 ${
@@ -160,8 +159,8 @@ const MyStyle = () => {
                       })
                     }
                   >
-                    รอตรวจสอบ
-                    {tableData.filter((i) => i.status === "รอตรวจสอบ").length}
+                    รอตรวจสอบ (
+                    {tableData.filter((i) => i.status === "รอตรวจสอบ").length})
                   </div>
                   <div
                     className={`button button4 ${
@@ -175,8 +174,8 @@ const MyStyle = () => {
                       })
                     }
                   >
-                    จ่ายแล้ว
-                    {tableData.filter((i) => i.status === "จ่ายแล้ว").length}
+                    จ่ายแล้ว (
+                    {tableData.filter((i) => i.status === "จ่ายแล้ว").length})
                   </div>
                   <div
                     className={`button button5 ${
@@ -190,8 +189,8 @@ const MyStyle = () => {
                       })
                     }
                   >
-                    ไม่สำเร็จ
-                    {tableData.filter((i) => i.status === "ไม่สำเร็จ").length}
+                    ไม่สำเร็จ (
+                    {tableData.filter((i) => i.status === "ไม่สำเร็จ").length})
                   </div>
                   <div
                     className={`button button6 ${
@@ -205,8 +204,8 @@ const MyStyle = () => {
                       })
                     }
                   >
-                    ยกเลิก
-                    {tableData.filter((i) => i.status === "ยกเลิก").length}
+                    ยกเลิก (
+                    {tableData.filter((i) => i.status === "ยกเลิก").length})
                   </div>
 
                   <br></br>
@@ -339,34 +338,32 @@ const MyStyle = () => {
                     </Table.Body>
 
                     {/* <Table.Footer>
-              <Table.Row>
-                <Table.HeaderCell colSpan="10">
-                  <Menu floated="right" pagination>
-                    <Menu.Item as="a" icon>
-                      <Icon name="chevron left" />
-                    </Menu.Item>
-                    <Menu.Item as="a">1</Menu.Item>
-                    <Menu.Item as="a">2</Menu.Item>
-                    <Menu.Item as="a">3</Menu.Item>
-                    <Menu.Item as="a">4</Menu.Item>
-                    <Menu.Item as="a" icon>
-                      <Icon name="chevron right" />
-                    </Menu.Item>
-                  </Menu>
-                </Table.HeaderCell>
-              </Table.Row>
-            </Table.Footer> */}
+                      <Table.Row>
+                        <Table.HeaderCell colSpan="10">
+                          <Menu floated="right" pagination>
+                            <Menu.Item as="a" icon>
+                              <Icon name="chevron left" />
+                            </Menu.Item>
+                            <Menu.Item as="a">1</Menu.Item>
+                            <Menu.Item as="a">2</Menu.Item>
+                            <Menu.Item as="a">3</Menu.Item>
+                            <Menu.Item as="a">4</Menu.Item>
+                            <Menu.Item as="a" icon>
+                              <Icon name="chevron right" />
+                            </Menu.Item>
+                          </Menu>
+                        </Table.HeaderCell>
+                      </Table.Row>
+                    </Table.Footer> */}
                   </Table>
                 </Segment>
               </div>
             );
-
             return x;
           }
           return <div>Default message before request is made.</div>;
         }}
       </Get>
-      ;
     </div>
   );
 };

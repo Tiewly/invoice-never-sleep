@@ -1,23 +1,22 @@
 import React from "react";
 import { Icon, Button } from "semantic-ui-react";
 
-export default function sideBar(location) {
+export default function sideBar() {
   return (
     <div className="sidebar">
-      {`${location}`}
       <h2>NVSL - IMS</h2>
       <div className="menu">
         <div className="menu-item">
           <Icon name="home" />
-          <p>Dashboard</p>
+          <p> Dashboard</p>
         </div>
         <div className="menu-item">
           <Icon name="group" />
-          <p>Partner</p>
+          <p> Partner</p>
         </div>
         <div className="menu-item">
           <Icon name="dollar sign" />
-          <p>Invoice</p>
+          <p> Invoice</p>
         </div>
       </div>
     </div>

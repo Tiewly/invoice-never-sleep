@@ -1,0 +1,117 @@
+.page {
+  padding: 2.5rem !important;
+  background-color: rgb(235, 243, 251);
+  min-height: 52.2rem !important;
+}
+
+Input {
+  width: 65rem !important;
+}
+
+.button {
+  min-width: 13rem;
+  padding: 0.5rem;
+  text-align: center;
+  display: inline-block;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.button1 {
+  background-color: white;
+  color: black;
+  border: 2px solid #3498db;
+}
+.button1:hover,
+.active1 {
+  background-color: #3498db;
+  color: white;
+}
+
+.button2 {
+  background-color: white;
+  color: black;
+  border: 2px solid #f1c40f;
+}
+.button2:hover,
+.active2 {
+  background-color: #f1c40f;
+  color: white;
+}
+
+.button3 {
+  background-color: white;
+  color: black;
+  border: 2px solid #9b59b6;
+}
+.button3:hover,
+.active3 {
+  background-color: #9b59b6;
+  color: white;
+}
+
+.button4 {
+  background-color: white;
+  color: black;
+  border: 2px solid #1abc9c;
+}
+.button4:hover,
+.active4 {
+  background-color: #1abc9c;
+  color: white;
+}
+
+.button5 {
+  background-color: white;
+  color: black;
+  border: 2px solid #95a5a6;
+}
+.button5:hover,
+.active5 {
+  background-color: #95a5a6;
+  color: white;
+}
+
+.button6 {
+  background-color: white;
+  color: black;
+  border: 2px solid #e74c3c;
+}
+.button6:hover,
+.active6 {
+  background-color: #e74c3c;
+  color: white;
+}
+.button6:visited {
+  background-color: #1f9c34;
+}
+
+.card-account {
+  background-color: rgb(255, 255, 255);
+  min-width: 16rem !important;
+  padding: 1rem;
+  float: right;
+  border-radius: 10px;
+}
+
+.card {
+  color: red;
+  background-color: rgb(240, 236, 236);
+  width: auto;
+  padding: 1rem;
+  margin: 1rem 0.5rem 2rem;
+  float: right;
+  text-align: center;
+  border-radius: 10px;
+}
+.card h3 {
+  display: inline;
+  padding: 0 1rem 0 1rem;
+}
+
+p {
+  padding: 0;
+}

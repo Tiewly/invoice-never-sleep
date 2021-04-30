@@ -1,22 +1,25 @@
 import React from "react";
-import { Menu, Icon, Sidebar } from "semantic-ui-react";
+import { Icon, Button } from "semantic-ui-react";
 
-export default function sideBar() {
+export default function sideBar(location) {
   return (
     <div className="sidebar">
+      {`${location}`}
       <h2>NVSL - IMS</h2>
-      <Menu.Item as="a">
-        <Icon name="home" />
-        Home
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Icon name="gamepad" />
-        Games
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Icon name="camera" />
-        Channels
-      </Menu.Item>
+      <div className="menu">
+        <div className="menu-item">
+          <Icon name="home" />
+          <p>Dashboard</p>
+        </div>
+        <div className="menu-item">
+          <Icon name="group" />
+          <p>Partner</p>
+        </div>
+        <div className="menu-item">
+          <Icon name="dollar sign" />
+          <p>Invoice</p>
+        </div>
+      </div>
     </div>
   );
 }

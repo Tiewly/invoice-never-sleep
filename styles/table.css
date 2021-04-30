@@ -1,7 +1,8 @@
 .page {
   padding: 2.5rem !important;
   background-color: rgb(235, 243, 251);
-  min-height: 52.2rem !important;
+  min-height: 52.2rem;
+  border-radius: 40px 0 0 40px !important;
 }
 
 Input {
@@ -113,5 +114,13 @@ Input {
 }
 
 p {
-  padding: 0;
+  padding: 0 !important;
+}
+
+.header-name {
+  margin-top: 2rem;
+}
+
+.header-name p {
+  font-size: large !important;
 }

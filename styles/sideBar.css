@@ -26,3 +26,12 @@ p {
   background: rgb(74, 78, 131);
   cursor: pointer;
 }
+
+.menu-item-open {
+  background-color: rgb(235, 243, 251);
+  color: black;
+  width: 17rem;
+  padding: 1rem 5rem 1rem 3rem;
+  float: right;
+  border-radius: 40px 0 0 40px;
+}

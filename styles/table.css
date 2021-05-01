@@ -5,18 +5,50 @@
   border-radius: 40px 0 0 40px !important;
 }
 
+.dot {
+  height: 15px;
+  width: 15px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
 Input {
   width: 65rem !important;
 }
 
+.start-tab {
+  margin-top: 1rem;
+}
+
+.tab {
+  background-color: rgb(223, 231, 245);
+  width: auto;
+  padding: 1rem 1rem 1rem 1rem;
+  display: inline;
+  border-radius: 10px 10px 0 0;
+}
+.fade-tab {
+  background-color: #ffffff;
+  padding: 2rem 1rem 1rem 1rem;
+}
+
+.page-table {
+  width: auto;
+  height: auto;
+  background-color: white;
+  padding: 0 2rem 2rem 2rem;
+}
+
 .button {
-  min-width: 13rem;
+  min-width: 11.5rem;
   padding: 0.5rem;
   text-align: center;
   display: inline-block;
   margin: 4px 2px;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
+  /* -webkit-transition-duration: 0.4s; /* Safari */
+  /* transition-duration: 0.4s;  */
   cursor: pointer;
   border-radius: 4px;
 }
@@ -27,7 +59,8 @@ Input {
   border: 2px solid #3498db;
 }
 .button1:hover,
-.active1 {
+.active1,
+.dot1 {
   background-color: #3498db;
   color: white;
 }
@@ -38,7 +71,8 @@ Input {
   border: 2px solid #f1c40f;
 }
 .button2:hover,
-.active2 {
+.active2,
+.dot2 {
   background-color: #f1c40f;
   color: white;
 }
@@ -49,7 +83,8 @@ Input {
   border: 2px solid #9b59b6;
 }
 .button3:hover,
-.active3 {
+.active3,
+.dot3 {
   background-color: #9b59b6;
   color: white;
 }
@@ -60,7 +95,8 @@ Input {
   border: 2px solid #1abc9c;
 }
 .button4:hover,
-.active4 {
+.active4,
+.dot4 {
   background-color: #1abc9c;
   color: white;
 }
@@ -71,7 +107,8 @@ Input {
   border: 2px solid #95a5a6;
 }
 .button5:hover,
-.active5 {
+.active5,
+.dot5 {
   background-color: #95a5a6;
   color: white;
 }
@@ -82,12 +119,10 @@ Input {
   border: 2px solid #e74c3c;
 }
 .button6:hover,
-.active6 {
+.active6,
+.dot6 {
   background-color: #e74c3c;
   color: white;
-}
-.button6:visited {
-  background-color: #1f9c34;
 }
 
 .card-account {
@@ -98,12 +133,16 @@ Input {
   border-radius: 10px;
 }
 
+.card-account a {
+  color: #9a9c9c;
+}
+
 .card {
   color: red;
   background-color: rgb(240, 236, 236);
   width: auto;
   padding: 1rem;
-  margin: 1rem 0.5rem 2rem;
+  margin: 0.5rem 0.5rem 2rem;
   float: right;
   text-align: center;
   border-radius: 10px;
@@ -113,8 +152,9 @@ Input {
   padding: 0 1rem 0 1rem;
 }
 
-p {
-  padding: 0 !important;
+.card p {
+  color: #e74c3c;
+  font-weight: 500;
 }
 
 .header-name {
@@ -123,4 +163,42 @@ p {
 
 .header-name p {
   font-size: large !important;
+}
+/* 
+Menu.Item {
+  padding-left: 2rem !important;
+  color: #95a5a6;
+} */
+
+.circle {
+  min-width: 2rem;
+  padding: 5px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 50%;
+  background-color: #3498db;
+  color: white;
+}
+
+.footer {
+  padding-left: 2rem !important;
+  color: #95a5a6;
+  text-align: center;
+  display: inline;
+}
+
+.head-table {
+  color: #797b7c;
+  margin-top: 4rem;
+}
+
+.drop-down {
+  min-width: 4rem;
+  padding: 5px 0 5px 5px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 10%;
+  background-color: #e7ebec;
+  color: rgb(0, 0, 0);
+  margin: 0 1rem 0 1rem;
 }

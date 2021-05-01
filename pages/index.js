@@ -429,7 +429,28 @@ const MyStyle = () => {
                             >
                               <Icon name="book" />
                             </Table.Cell>
-                            <Table.Cell>{status}</Table.Cell>
+                            <Table.Cell>
+                              <div
+                                className={
+                                  status === "รอชำระเงิน"
+                                    ? "active2"
+                                    : status === "รอตรวจสอบ"
+                                    ? "active3"
+                                    : status === "จ่ายแล้ว"
+                                    ? "active4"
+                                    : status === "ไม่สำเร็จ"
+                                    ? "active5"
+                                    : "active6"
+                                }
+                                style={{
+                                  padding: "0.25rem 0.5rem",
+                                  borderRadius: "5px",
+                                  textAlign: "center",
+                                }}
+                              >
+                                {status}
+                              </div>
+                            </Table.Cell>
                           </Table.Row>
                         )
                       )}
